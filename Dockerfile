@@ -1,12 +1,19 @@
 FROM php:8.1-apache
 RUN a2enmod rewrite
 # 安装相关拓展
-RUN apt update && apt install imagemagick libmagickwand-dev -y \
+# RUN apt update && apt install imagemagick libmagickwand-dev -y \
+#     && pecl install imagick \
+#     && docker-php-ext-install bcmath \
+#     && docker-php-ext-install pdo_mysql \
+#     && docker-php-ext-install pdo_pgsql pgsql \
+#     && docker-php-ext-enable imagick 
+RUN apt update && apt install -y --no-install-recommends imagemagick libmagickwand-dev libssl-dev zlib1g-dev curl git unzip netcat libxml2-dev libpq-dev libzip-dev \
     && pecl install imagick \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-install pdo_pgsql pgsql \
-    && docker-php-ext-enable imagick 
+    && docker-php-ext-enable imagick pdo_pgsql
 RUN pecl install redis \
     && docker-php-ext-enable redis
 RUN { \
