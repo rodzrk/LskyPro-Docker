@@ -5,6 +5,7 @@ RUN apt update && apt install imagemagick libmagickwand-dev -y \
     && pecl install imagick \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install php-pgsql \
     && docker-php-ext-enable imagick 
 RUN pecl install redis \
     && docker-php-ext-enable redis
