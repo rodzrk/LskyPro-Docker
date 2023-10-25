@@ -1,7 +1,7 @@
 FROM php:8.1-apache
 RUN a2enmod rewrite
 # 安装相关拓展
-RUN apt update && apt install imagemagick libmagickwand-dev php-pgsql -y \
+RUN apt update && apt install imagemagick libmagickwand-dev php8.2-pgsql -y \
     && pecl install imagick \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install pdo_mysql \
